@@ -1,10 +1,7 @@
-<div class="container p-4" style="max-width:500px;min-width:450px">
+<div class="container p-4" style=" max-width:500px; min-width:450px;">
   <div>
     <div>
-      <img
-        src="https://drive.google.com/file/d/1hvRAGrdq0SqFBZApx2--IcuDf-DOmOBH/view"
-        alt="company logo"
-      />
+      <img [src]="logo" alt="company logo" />
     </div>
     <h3 style="padding: 25px 25px 25px 0; font-size:15px">
       Hello there, Sign in to continue
@@ -15,7 +12,7 @@
         <div class="form-group text-secondary pb-4">
           <label class="pb-1">Email</label>
           <input
-            style="line-height: 2.5;color:#00008B;"
+            style="line-height: 2.5; color:#00008B;"
             type="text"
             formControlName="name"
             class="form-control"
@@ -23,7 +20,8 @@
           />
           <div
             *ngIf="
-              loginForm.controls.name.touched && loginForm.controls.name.invalid
+              loginForm.get('name').touched &&
+              loginForm.get('name').hasError('username')
             "
           >
             <span class="text-danger"> Username is required </span>
@@ -31,10 +29,17 @@
         </div>
         <div class="form-group text-secondary">
           <label class="pb-1">Password</label>
-          <div style="color:#00008B">
+          <div style="color:#00008B; position:relative">
+            <img
+              (click)="showPass = !showPass"
+              style="position: absolute; color:#00008B; cursor:pointer; right: 13px; top: 15px;"
+              [src]="
+                showPass ? 'assets/view-pass.svg' : 'assets/remove-eye.svg'
+              "
+            />
             <input
               style="line-height: 2.5"
-              type="password"
+              [type]="showPass ? 'text' : 'password'"
               formControlName="password"
               class="form-control"
               autocomplete="off"
@@ -43,7 +48,7 @@
           </div>
           <div
             *ngIf="
-              loginForm.controls.password.touched &&
+              loginForm.get('password').touched &&
               loginForm.controls.password.invalid
             "
           >
@@ -63,12 +68,11 @@
         </div>
         <br />
         <button
-          style="
-          border-color:#00008B;
-          background-color:#00008B;
-          width: 100%;
-          height: 3.2rem;
-          font-weight: 500;"
+          [disabled]="
+            loginForm.controls.password.invalid ||
+            loginForm.get('name').hasError('username')
+          "
+          style="border-color:#00008B; background-color:#00008B; width: 100%; height: 3.2rem; font-weight:500;"
           class="btn btn-primary"
           (click)="nextMethod(user.value, pwd.value)"
         >
@@ -78,22 +82,4 @@
     </div>
   </div>
 </div>
-
-<table class="styled-table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Points</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Dom</td>
-      <td>6000</td>
-    </tr>
-    <tr class="active-row">
-      <td>Melissa</td>
-      <td>5150</td>
-    </tr>
-  </tbody>
-</table>
+<div></div>

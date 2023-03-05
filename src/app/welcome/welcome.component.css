@@ -3,3 +3,14 @@ p {
   font-size: 27px;
   font-family: Arial;
 }
+.avatar {
+  height: 65px;
+  border-radius: 50%;
+}
+table {
+  text-align: center;
+}
+td,th{
+  vertical-align: middle;
+}
+

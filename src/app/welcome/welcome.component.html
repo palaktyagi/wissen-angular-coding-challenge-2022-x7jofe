@@ -1,5 +1,24 @@
-<h3>Welcome to Wissen Coding Challenge!</h3>
+<h3 class="p-3">Welcome to Wissen Coding Challenge!</h3>
 
-
-Your login details: <br>
-<p>Username: {{user?.username}}</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Avatar</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <th scope="row">{{ user.id }}</th>
+      <td>
+        <img class="avatar" [src]="user.avatar" />
+      </td>
+      <td>{{ user.first_name }}</td>
+      <td>{{ user.last_name }}</td>
+      <td>{{ user.email }}</td>
+    </tr>
+  </tbody>
+</table>
